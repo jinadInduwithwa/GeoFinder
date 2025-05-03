@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Button = ({ to, onClick, children, icon: Icon, variant = "primary", className = "" }) => {
-  const baseStyles = "inline-flex items-center gap-2 px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300";
+  const baseStyles = "inline-flex items-center gap-2 px-4 py-2  text-lg font-semibold transition-all duration-300";
   const variants = {
-    primary: "bg-[#449e48] text-white hover:bg-[#3d8c40]  hover:scale-105",
+    primary: "bg-[#449e48] text-white hover:bg-[#3d8c40]  hover:scale-100",
     secondary: "bg-white text-green-600 hover:bg-gray-100 hover:scale-105"
   };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCountryContext } from '../context/CountryContext';
 import Card from '../components/UI/Card';
+import { HiSearch } from 'react-icons/hi';
 
 const CountryList = () => {
   const {
@@ -61,17 +62,20 @@ const CountryList = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-6">Countries</h1>
       <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center items-center">
+      <div className="relative w-full sm:w-1/3">
         <input
           type="text"
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Search by country name..."
-          className="p-2 border border-gray-300 rounded-lg w-full sm:w-1/3"
+          className="p-2 border border-gray-300 rounded-full w-full pl-10"
         />
+        <HiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      </div>
         <select
           value={selectedRegion}
           onChange={handleRegionChange}
-          className="p-2 border border-gray-300 rounded-lg w-full sm:w-1/4"
+          className="p-2 border border-gray-300 rounded-full w-full sm:w-1/4"
         >
           <option value="">All Regions</option>
           <option value="Africa">Africa</option>
@@ -83,7 +87,7 @@ const CountryList = () => {
         <select
           value={language}
           onChange={handleLanguageChange}
-          className="p-2 border border-gray-300 rounded-lg w-full sm:w-1/4"
+          className="p-2 border border-gray-300 rounded-full w-full sm:w-1/4"
         >
           <option value="en">English</option>
           <option value="fr">French</option>
@@ -92,7 +96,7 @@ const CountryList = () => {
         </select>
         <button
           onClick={handleClearCache}
-          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg"
+          className=" hover:text-red-600 text-gray-200  py-2 px-4 rounded-full border-1"
         >
           Clear Cache
         </button>

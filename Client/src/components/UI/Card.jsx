@@ -36,9 +36,9 @@ const Card = ({ country }) => {
     .join(", ") + (Object.keys(country.languages || {}).length > 3 ? "..." : "");
 
   return (
-    <div className="w-full max-w-sm bg-gray-50 border border-gray-200 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl mx-auto relative group">
+    <div className="w-full max-w-sm bg-gray-50 border border-gray-200  shadow-lg transition-all duration-300 hover:shadow-xl mx-auto relative group">
       <Link to={`/country/${country.cca3}`}>
-        <div className="relative rounded-t-lg w-full h-40 overflow-hidden">
+        <div className="relative  w-full h-40 overflow-hidden">
           <img
             className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
             src={country.flags.png}
@@ -51,7 +51,7 @@ const Card = ({ country }) => {
           </div>
         </div>
       </Link>
-      <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded-lg text-sm font-semibold text-gray-700">
+      <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded-sm text-sm font-semibold text-gray-700">
         🌏 {country.area ? `${formatPopulation(country.area)} km²` : "N/A"}
       </div>
       <div className="p-5">

@@ -9,8 +9,8 @@ function Home() {
     <div className="w-full overflow-hidden">
       <HeroSection />
       <AsiaCountrySection />
-      {/* <AmericasCountrySection />
-      <EuropeCountrySection /> */}
+       <AmericasCountrySection />
+      <EuropeCountrySection /> 
     </div>
   );
 }

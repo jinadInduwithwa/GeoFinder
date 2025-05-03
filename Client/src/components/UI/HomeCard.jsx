@@ -12,9 +12,9 @@ const HomeCard = ({ country }) => {
       : country.translations?.[language]?.common || country.name?.common || 'Unknown';
 
   return (
-    <div className="flex-shrink-0 w-60 sm:w-72 mx-2 sm:mx-4 bg-gray-50 border border-gray-200 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl relative group">
+    <div className="flex-shrink-0 w-60 sm:w-72 mx-2 sm:mx-4 bg-gray-50 border border-gray-200  shadow-lg transition-all duration-300 hover:shadow-xl relative group">
       <Link to={`/country/${country.cca3}`}>
-        <div className="relative rounded-t-lg w-full h-40 sm:h-48 overflow-hidden">
+        <div className="relative  w-full h-40 sm:h-48 overflow-hidden">
           <img
             className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
             src={country.flags?.png || 'https://via.placeholder.com/150'}
@@ -28,7 +28,7 @@ const HomeCard = ({ country }) => {
           </div>
         </div>
       </Link>
-      <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded-lg text-xs sm:text-sm font-semibold text-gray-700">
+      <div className="absolute top-4 right-4 bg-white px-2 py-1 rounded-sm text-xs sm:text-sm font-semibold text-gray-700">
         🌏 {country.area ? `${country.area.toLocaleString()} km²` : 'N/A'}
       </div>
       <div className="p-4 sm:p-5">
