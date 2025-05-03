@@ -23,6 +23,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
     "@types/supertest": "^6.0.3",
+    "@vitejs/plugin-react": "^4.4.1",
     "babel-jest": "^29.7.0",
     "concurrently": "^9.1.2",
     "identity-obj-proxy": "^3.0.0",
