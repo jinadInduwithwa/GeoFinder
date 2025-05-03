@@ -1,4 +1,3 @@
-// server.js
 import "express-async-errors";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -8,32 +7,29 @@ import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
 
 // Routers
 import authRouter from "./routes/authRouter.js";
 import restCountryAPIRoute from "./routes/restCountryAPIRoute.js";
 import favoriteRoutes from "./routes/favoritesRouter.js";
 
-// Public
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import path from "path";
-
 // Middleware
 import errorHandelerMiddleware from "./middleware/errorHandelerMiddleware.js";
 
-const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const app = express();
 
-// Enable CORS for requests from the frontend
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-    credentials: true, // Allow cookies
-  })
-);
+// Enable CORS for production and development
+const corsOptions = {
+  origin: process.env.NODE_ENV === "production" ? process.env.CLIENT_URL : "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // Middleware
 if (process.env.NODE_ENV === "development") {
@@ -42,21 +38,23 @@ if (process.env.NODE_ENV === "development") {
 app.use(cookieParser());
 app.use(express.json());
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "../public")));
+// Serve static files from Client/dist in production
+app.use(express.static(path.join(__dirname, "Client", "dist")));
+
+// Serve public assets (if needed)
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.get("/api/v1/test", (req, res) => {
   res.json({ msg: "Test route" });
 });
-
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/countries", restCountryAPIRoute);
-app.use('/api/v1/favorites', favoriteRoutes);
+app.use("/api/v1/favorites", favoriteRoutes);
 
-// 404 Route
-app.use("*", (req, res) => {
-  res.status(404).json({ msg: "route not found" });
+// Fallback to index.html for SPA routing
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "Client", "dist", "index.html"));
 });
 
 // Error-handling middleware
