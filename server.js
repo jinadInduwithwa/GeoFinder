@@ -55,7 +55,7 @@ app.use("/api/v1/countries", restCountryAPIRoute);
 app.use('/api/v1/favorites', favoriteRoutes);
 
 // 404 Route
-app.use("*", (req, res) => {
+app.use((req, res) => {
   res.status(404).json({ msg: "route not found" });
 });
 
@@ -69,8 +69,9 @@ const startServer = async () => {
     console.log("BASE_URL:", process.env.BASE_URL);
     await mongoose.connect(process.env.MONGO_URL);
     console.log("Connected to MongoDB");
-    app.listen(process.env.PORT || 5100, () => {
-      console.log(`Server is running on port ${process.env.PORT || 5100}`);
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);
